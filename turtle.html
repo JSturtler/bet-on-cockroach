@@ -9,118 +9,25 @@
       <div id="wrap">
          <h1>Javascript Turtle Graphics</h1>
          <div id="leftcolumn">
-            <h4>Language Reference</h4>
-            <code>
-              forward(distance) <br/>
-              right(angle) <br/>
-              left(angle) <br/>
-              goto(x,y) <br/>
-              clear() <br/>
-              penup() <br/>
-              pendown() <br/>
-              reset() <br/>
-              angle(angle) <br/>
-              width(width) <br/>
-              colour(r,g,b,a) <br/>
-              write(string) <br/>
-              n = random(low,high) <br/>
-              hideTurtle() <br/>
-              showTurtle() <br/>
-              redrawOnMove(bool) <br/>
-              draw() <br/>
-              repeat(n, action) <br/>
-              wrap(bool) <br/>
-              animate(action,ms) <br/>
-              <a href="examples/" target="_new">See some other examples</a><br/>
-            </code>
          </div> <!-- leftcolumn -->
          <div id="midcolumn">
             <h4>Canvas</h4>
             <canvas id="turtlecanvas" width="300" height="300"></canvas>
             <canvas id="imagecanvas" width="300" height="300" style="display:none"></canvas>
-            <h4>Command</h4>
-               <input type="text" id="command" />
 	    <br/>
-	    <button id="resetButton">Reset</button>
+	    <button id="One">One</button>
+	    <button id="Two">Two</button>
+	    <button id="Three">Three</button>
+	    <button id="Four">Four</button>
+
 
          </div> <!-- midcolumn -->
          <div id="rightcolumn">
-            <h4>Definitions</h4>
             <div style="position:relative; height: 900px" id="editor-parent">
-            <div id="editor" style="position:absolute; top:0; left:0; bottom: 0; right: 0">
-var timer;
-const R =100;
-const X = 150;
-const Y = 150;
-const X2 = -150;
-const Y2 = -150;
-const X3 = -150;
-const Y3 = 150;
-const X4 = 150;
-const Y4 = -150;
-
-function circle(X, Y ,R) {
-    const n = 36;
-    const a = 360 / n;
-    const d = 2 * R * Math.sin( degToRad(a/2) );
-    penup();
-    goto(X, Y);
-    left(a/2);
-    forward(R);
-    right(90 + a/2);
-    pendown();
-    for(var i = 0; i < n; i++ ){
-        forward(d);
-        right(a);
-    }
-    goto(X, Y);
-}
-
-function is_finished() {
-    // ≈сли рассто€ние от черепахи до центра круга
-    //меньше радиуса этого круга
-    //( turtle.pos.x, turtle.pos.y )
-    var L = Math.sqrt((turtle.pos.x-X)**2+(turtle.pos.y-Y)**2);
-    var L2 = Math.sqrt((turtle.pos.x-X2)**2+(turtle.pos.y-Y2)**2);
-    var L3 = Math.sqrt((turtle.pos.x-X3)**2+(turtle.pos.y-Y3)**2);
-    var L4 = Math.sqrt((turtle.pos.x-X4)**2+(turtle.pos.y-Y4)**2);
-    return R > L || R > L2 || R > L3 || R > L4 ;
-}
-
-function game(bet) {
-    if(timer) {
-        alert("Prev game hasn't finished yet!");
-        return;
-    }
-    reset();
-    circle(X, Y, R);
-    goto(0, 0);
-    pendown();
-    timer = setInterval(move, 200); 
-    //console.log(turtle);
-}
-
-function move() {
-    if( is_finished() ) {
-        clearInterval(timer);
-        timer = undefined;
-        alert("Finish!");
-    }
-    a = random(0, 360);
-    d = random(1, 30);
-    forward(d);
-    right(a);
-}
-            </div>
             </div>
          </div> <!-- rightcolumn -->
       </div> <!-- wrap-->
       <script type="text/javascript" src="turtle.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ace.js" type="text/javascript" charset="utf-8"></script>
-<script>
-    var editor = window.editor = ace.edit("editor");
-    editor.setTheme("ace/theme/monokai");
-    editor.getSession().setMode("ace/mode/javascript");
-</script>
+      <script type="text/javascript" src="game.js"></script>
    </body>
 </html>

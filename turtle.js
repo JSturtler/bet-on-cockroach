@@ -297,28 +297,5 @@ function setFont(font) {
    imageContext.font = font;
 }
 
-// Execute the program when the command box is changed
-// (when the user presses enter)
-$('#command').change(function () {
-   var commandText = $(this).val();
-   var definitionsText = window.editor.getValue();
-   try {
-     // execute any code in the definitions box
-     eval(definitionsText);
-     // execute the code in the command box
-     eval(commandText);
-   } catch(e) {
-     alert('Exception thrown, please see console');
-     throw e;
-   } finally {
-     // clear the command box
-     $(this).val('');
-   }
-});
-
-$('#resetButton').click(function() {
-  reset();
-});
-
-
 reset();
+
