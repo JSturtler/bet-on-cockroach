@@ -1,13 +1,14 @@
 var timer;
 const R =100;
-const X = 150;
-const Y = 150;
+const X1 = 150;
+const Y1 = 150;
 const X2 = -150;
 const Y2 = -150;
 const X3 = -150;
 const Y3 = 150;
 const X4 = 150;
 const Y4 = -150;
+var bet2;
 
 function circle(X, Y ,R) {
     const n = 36;
@@ -28,13 +29,17 @@ function circle(X, Y ,R) {
 
 function is_finished() {
     // Если расстояние от черепахи до центра круга
-    //меньше радиуса этого круга
-    //( turtle.pos.x, turtle.pos.y )
-    var L = Math.sqrt((turtle.pos.x-X)**2+(turtle.pos.y-Y)**2);
+    // меньше радиуса этого круга
+    var L1 = Math.sqrt((turtle.pos.x-X1)**2+(turtle.pos.y-Y1)**2);
     var L2 = Math.sqrt((turtle.pos.x-X2)**2+(turtle.pos.y-Y2)**2);
     var L3 = Math.sqrt((turtle.pos.x-X3)**2+(turtle.pos.y-Y3)**2);
     var L4 = Math.sqrt((turtle.pos.x-X4)**2+(turtle.pos.y-Y4)**2);
-    return R > L || R > L2 || R > L3 || R > L4 ;
+	
+    if (R > L1 ) { return 1; }
+    if (R > L2 ) { return 2; }
+    if (R > L3 ) { return 3; }
+    if (R > L4 ) { return 4; }
+    return 0;
 }
 
 function game(bet) {
@@ -43,18 +48,23 @@ function game(bet) {
         return;
     }
     reset();
-    circle(X, Y, R);
+    circle(X1, Y1, R);
     goto(0, 0);
     pendown();
-    timer = setInterval(move, 200); 
+    timer = setInterval(move, 200, bet); 
     //console.log(turtle);
 }
 
-function move() {
-    if( is_finished() ) {
+function move(bet) {
+    var circleN = is_finished();
+    if( circleN > 0 ) {
         clearInterval(timer);
         timer = undefined;
-        alert("Finish!");
+	if( circleN == bet ) {
+           alert("You win!");
+	} else {
+           alert("You fault, loser!");
+	}
     }
     a = random(0, 360);
     d = random(1, 30);
